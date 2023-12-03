@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REST API Server</title>
+</head>
+<body>
+    <h1>Etimo backend case REST-api server</h1>
+    <button onclick="go_home()" style="width:50px; height:50px;">HOME
+    </button><br/>
+    <script>src="/calls"</script>
+    <h2>List of all employees ({{ number }} ):</h2>
+    <ul>
+        {% for employee in employees %}
+            {{loop.index}}. <br/> Name: <strong>{{ employee.name }}</strong> <br/> Email: <strong>{{ employee.email }}</strong><br/><br/>
+        {% endfor %}
+    </ul>
+    <p id="currentUrl"></p>
+
+    <script>
+        function goto_add_employee(){
+            fetch(window.location.href+'add_employee', {
+                method: 'GET'
+            })
+            .then(data => {
+                window.location.href=data.url
+            })
+            .catch(error => {
+                console.error('CATCHERROR:', error);
+            });
+        }
+
+        function go_home(){
+            var path = window.location.href;
+            var newpath = path.replace("/list_employees", "");
+            window.location.href = newpath
+        }
+    </script>
+</body>
+</html>

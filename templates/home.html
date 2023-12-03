@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REST API Server</title>
+</head>
+<body>
+    <h1>Etimo backend case REST-api server</h1>
+    <button onclick="goto_add_employee()">Add employee page</button>
+    <button onclick="delete_employee()">Delete employee page</button>
+    <button onclick="list_employees()">List all employees page</button>
+    <script>src="/calls"</script>
+    <h2>List of existing endpoints:</h2>
+    <ul>
+        {% for endpoint in endpoints %}
+            <li>Path - ' <strong>{{ endpoint.endpoint }}</strong> ': {{ endpoint.description }}</li>
+        {% endfor %}
+    </ul>
+    <p id="currentUrl"></p>
+
+    <script>
+        function goto_add_employee(){
+            fetch(window.location.href+'add_employee', {
+                method: 'GET'
+            })
+            .then(data => {
+                window.location.href=data.url
+            })
+            .catch(error => {
+                console.error('CATCHERROR:', error);
+            });
+        }
+        function list_employees(){
+            fetch(window.location.href+'list_employees', {
+                method: 'GET'
+            })
+            .then(data => {
+                window.location.href=data.url
+            })
+            .catch(error => {
+                console.error('CATCHERROR:', error);
+            });
+
+        }
+    </script>
+</body>
+</html>
