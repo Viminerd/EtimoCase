@@ -27,7 +27,7 @@ def create_app(test_config=None ):
 
     #GET: List employees
     @app.route('/list_employees', methods=['GET'])
-    @describe_route("/", "[GET] List of all employees")
+    @describe_route("/list_employees", "[GET] List of all employees")
     def employees_page(): 
         employee_list = company_handler.get_employees()
         employees = [{'name':employee.name,
@@ -35,7 +35,6 @@ def create_app(test_config=None ):
         'department':employee.department}           
         for key, employee in employee_list.items()
         ]
-        
         return render_template('employee_list.html', employees=employees, number = company_handler.number_of_employees())
 
 
@@ -72,8 +71,14 @@ def create_app(test_config=None ):
     @app.route(delete_employee, methods=['GET','POST'])
     @describe_route(delete_employee, "[GET] Takes you to employee delete page. [POST] delete employee by enter email as arg.")
     def delete_employee():
+        employee_list = company_handler.get_employees()
+        employees = [{'name':employee.name,
+            'email':employee.email, 
+            'department':employee.department}           
+            for key, employee in employee_list.items()
+            ]
         if request.method == 'GET':
-            return render_template('delete_employee_form.html')
+            return render_template('delete_employee_form.html', employees = employees)
         if request.method == 'POST':
             data = request.json
             email = data['email'].lower()
@@ -83,7 +88,7 @@ def create_app(test_config=None ):
             else: 
                 pass
                 #send error message
-        return render_template('delete_employee_form.html')
+        return render_template('delete_employee_form.html', employees = employees)
     
     
     

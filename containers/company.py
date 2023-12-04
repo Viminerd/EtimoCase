@@ -5,6 +5,7 @@ class company_class:
         self.size = 0
         
     def add(self,employee):
+        employee.email = employee.email.lower()
         self.employees[employee.email] = employee
         self.size += 1
     
