@@ -11,19 +11,18 @@
     </button><br/>
     Enter employee name <input name="namebox" type="text" id="name" employeename="Company name"><br><br>
     Enter employee email <input name="emailbox" type="email" id="email" email="Password"><br><br>
-    Enter employee department <input name= "departmentbox" type="text" id="dep" department="software"><br><br>
-    <button onclick="postData()">Add employee</button>
+    Enter employee department <input name= "departmentbox" type="text" id="department" department="software"><br><br>
+    <button onclick="post_new_employee()">Add employee</button>
 
     <script>
-        function postData() {
-            console.log("HELLO1)")
+        function post_new_employee(name, email, department) {
             name = document.getElementById('name').value
             email = document.getElementById('email').value
-            console.log(name)
-            console.log("HELLO")
+            department = document.getElementById('department').value
             const employee_data = {
                 'name' : name,
-                'email' : email
+                'email' : email,
+                'department' : department
             };
 
             fetch(window.location.href, {

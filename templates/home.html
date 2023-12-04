@@ -6,7 +6,7 @@
     <title>REST API Server</title>
 </head>
 <body>
-    <h1>Etimo backend case REST-api server</h1>
+    <h1>Etimo backend case REST-API server</h1>
     <button onclick="goto_add_employee()">Add employee page</button>
     <button onclick="delete_employee()">Delete employee page</button>
     <button onclick="list_employees()">List all employees page</button>
@@ -28,7 +28,7 @@
                 window.location.href=data.url
             })
             .catch(error => {
-                console.error('CATCHERROR:', error);
+                console.error('Error:', error);
             });
         }
         function list_employees(){
@@ -39,9 +39,21 @@
                 window.location.href=data.url
             })
             .catch(error => {
-                console.error('CATCHERROR:', error);
+                console.error('Error:', error);
             });
 
+        }
+
+        function delete_employee(){
+            fetch(window.location.href+'delete_employee', {
+                method: 'GET'
+            })
+            .then(data => {
+                window.location.href=data.url
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
         }
     </script>
 </body>

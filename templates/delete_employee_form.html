@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REST API Server</title>
+</head>
+<body>
+    <h1>Enter the email of the employee you want to remove. <br/> If email unknown there is a GET request based on employee name</h1>
+    <button onclick="go_home()" style="width:50px; height:50px;">HOME
+    </button><br/>
+    Enter employee email <input name="emailbox" type="email" id="emailbox" email="email@example.com"><br><br>
+    <button onclick="postData()">Delete employee</button>
+
+    <script>
+        function postData() {
+            email = document.getElementById('emailbox').value
+            const employee_data = {
+                'email' : email
+            };
+
+            fetch(window.location.href, {
+                headers: { 'Content-Type': 'application/json' },
+                method: 'POST',
+                body: JSON.stringify(employee_data)
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        function go_home(){
+            var path = window.location.href;
+            var newpath = path.replace("/delete_employee", "");
+            window.location.href = newpath
+        }
+    </script>
+
+</body>
+</html>
