@@ -12,8 +12,8 @@
     </style>
 </head>
 <body>
-    <h1>Enter the email of the employee you want to remove. <br/> If email unknown there is a GET request based on employee name</h1>
-    <button onclick="go_home()" style="width:50px; height:50px;">HOME
+    <h1>Enter the email of the employee you want to remove</h1>
+    <button onclick="go_home()" style="width:50px; height:50px;">HOME 
     </button><br/>
     Enter employee email<div class="text-container" id="text_container"> 
         <input type="text" id="emailbox" list="employee_list" 
@@ -44,22 +44,24 @@
                 body: JSON.stringify(employee_data)
             })
             .then(data => {
-                var list = document.getElementById('employee_list');
-                var options = list.getElementsByTagName('option');
-                for (var i = 0; i < options.length; i++) {
-                    if (options[i].value === email) {
-                        options[i].remove();
-                        break;
+                if (data.status>199 && data.status <300){
+                    var list = document.getElementById('employee_list');
+                    var options = list.getElementsByTagName('option');
+                    for (var i = 0; i < options.length; i++) {
+                        if (options[i].value === email) {
+                            options[i].remove();
+                            break;
+                        }
                     }
-                }
-                document.getElementById('emailbox').value = "";
-                var addedText = document.getElementById('addedText');
-                addedText.style.display = 'inline-block';
-                addedText.textContent = "Deleted : " +employee_data['email'];
+                    document.getElementById('emailbox').value = "";
+                    var addedText = document.getElementById('addedText');
+                    addedText.style.display = 'inline-block';
+                    addedText.textContent = "Deleted : " +employee_data['email'];
 
-                setTimeout(function() {
-                    addedText.style.display = 'none';
-                }, 2000);
+                    setTimeout(function() {
+                        addedText.style.display = 'none';
+                    }, 2000);
+                }
             })
             
             .catch(error => {

@@ -13,7 +13,7 @@
 </head>
 <body>
     <h1>Register a new employee to the company with the form below</h1>
-    <button onclick="go_home()" style="width:50px; height:50px;">HOME
+    <button onclick="go_home()" style="width:50px; height:50px;">HOME 
     </button><br/>
     Enter employee name <input name="namebox" type="text" id="name" employeename="Company name"><br><br>
     Enter employee email <input name="emailbox" type="email" id="email" email="Password"><br><br>
@@ -40,17 +40,19 @@
                 
             })
             .then(data => {
-                document.getElementById('name').value="";
-                document.getElementById('email').value="";
-                document.getElementById('department').value="";
+                if (data.status>199 && data.status <300){
+                    document.getElementById('name').value="";
+                    document.getElementById('email').value="";
+                    document.getElementById('department').value="";
 
-                var addedText = document.getElementById('addedText');
-                addedText.style.display = 'inline-block';
-                addedText.textContent = "Added : " +employee_data['name'];
+                    var addedText = document.getElementById('addedText');
+                    addedText.style.display = 'inline-block';
+                    addedText.textContent = "Added : " +employee_data['name'];
 
-                setTimeout(function() {
-                    addedText.style.display = 'none';
-                }, 2000);
+                    setTimeout(function() {
+                        addedText.style.display = 'none';
+                    }, 2000);
+                }
             })
             .catch(error => {
                 console.error('CATCHERROR:', error);
