@@ -1,16 +1,13 @@
-import http.server
-import socketserver
-PORT = 8080
-    
 from flask import Flask, jsonify, render_template, request
-import json
-
 from containers import company, employee
+
+PORT = 8080
+
 def create_app(test_config=None ):
     app = Flask(__name__)
     company_handler = company.company_class(name="Etimo")
     
-    #GET: Go to home page 
+    ##GO TO HOME PAGE#
     @app.route('/')
     @describe_route("/", "[GET] HTML-Homepage, JSON-list of available endpoints")
     def home_page(): 
@@ -23,7 +20,7 @@ def create_app(test_config=None ):
         else:
             return render_template('home.html', endpoints=endpoints)
 
-    #GET: List employees
+    ##LIST EMPLOYEES##
     @app.route('/list_employees', methods=['GET'])
     @describe_route("/list_employees", "[GET] HTML:List of all employees. JSON:Nothing")
     def employees_page(): 
@@ -39,7 +36,7 @@ def create_app(test_config=None ):
             return render_template('employee_list.html', employees=employees, number = company_handler.number_of_employees())
 
 
-    #GET,POST: Add employee, page and command 
+    ##ADD EMPLOYEE##
     add_employee = "/add_employee"
     @app.route(add_employee, methods=['GET','POST'])
     @describe_route(add_employee, "[GET] HTML:Takes you to employee add page, JSON:Nothing. [POST] add a employee to the company, args-(name, email, department)")
@@ -74,7 +71,7 @@ def create_app(test_config=None ):
                 return {"Error": "Email: "+data['email']+" already in use."}, 400
     
     
-    #GET,POST: delete employee. Page and command
+    ##DELETE EMPLOYEES#
     delete_employee = "/delete_employee"
     @app.route(delete_employee, methods=['GET','POST'])
     @describe_route(delete_employee, "[GET] HTML:Takes you to employee delete page, JSON:Nothing. [POST] delete employee by enter email as arg.")
@@ -103,7 +100,7 @@ def create_app(test_config=None ):
         return render_template('delete_employee_form.html', employees = employees)
     
     
-    #GET,POST: Resets company for script asserts
+    ##RESET COMPANY##
     reset = "/reset_company"
     @app.route(reset, methods=['PUT'])
     @describe_route(reset, "[PUT] Deletes all employees and resets company")

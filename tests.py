@@ -72,6 +72,8 @@ r = requests.get(url+"/list_employees", headers=headers)
 assert r.status_code == 200
 print(r.json())
 
+r = requests.get(url+"/", headers=headers)
+assert r.status_code == 200
 
 
 
