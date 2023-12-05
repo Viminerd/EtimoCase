@@ -11,7 +11,7 @@ REST-API for employee tracking
 ## Folder description 
 - Folder containers: Has custom classes company and employee.
   - company.py contains functions and a dictionary of employees for handling.
-     employee.py contains information about each employee.
+  - employee.py contains information about each employee.
 - Folder templates: Contains html pages for easy API calling in browser.
 - Script server.py: Endpoints and server start.
 - Script tests.py: Various calls and asserts to make sure the APIs does what is expected.
