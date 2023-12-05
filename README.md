@@ -5,7 +5,7 @@ REST-API for employee tracking
 - Download folder
 - Assert flask is downloaded, can be downloaded in terminal with python3 -m pip install flask
 - Server is being run on server.py. Call python server.py in terminal
-- Send calls in browser \>ip\<:8080 or use localhost:8080 or use JSON via script.
+- Send calls in browser with either \>ip\<:8080 or localhost:8080. You can also use a script with JSON type calls. 
 - call python tests.py with various asserts to check the functionality of the endpoints
 
 
